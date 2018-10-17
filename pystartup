@@ -1,0 +1,22 @@
+import atexit
+import os
+import readline
+import rlcompleter
+
+historyPath = os.environ['HOME'] + '/.python_history'
+
+os.environ['PYTHON_HISTORY'] = historyPath
+
+def save_history(historyPath=historyPath):
+    import readline
+    import os
+    readline.write_history_file(os.environ['PYTHON_HISTORY'])
+
+if os.path.exists(historyPath):
+    readline.read_history_file(historyPath)
+else:
+    f = open(historyPath, 'a')
+    f.close()
+
+atexit.register(save_history)
+del os, atexit, readline, rlcompleter, save_history, historyPath
